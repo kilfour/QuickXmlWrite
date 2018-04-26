@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq.Expressions;
 using Xunit;
-using Xunit.Sdk;
 
 namespace QuickXmlWrite.Tests
 {

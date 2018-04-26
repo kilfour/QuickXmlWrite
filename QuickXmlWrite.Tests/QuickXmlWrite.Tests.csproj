@@ -46,6 +46,7 @@
     <Compile Include="ComposingWriters.cs" />
     <Compile Include="InitialSpike.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WritingADictionary.cs" />
     <Compile Include="WritingAListOfInts.cs" />
     <Compile Include="WritingAnObject.cs" />
   </ItemGroup>
