@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -17,6 +16,7 @@ namespace QuickXmlWrite.XmlStructure
 	        Attributes = new Dictionary<string, string>();
 
         }
+
 	    public override string AsString()
 	    {
 	        var builder = new StringBuilder();
@@ -33,35 +33,5 @@ namespace QuickXmlWrite.XmlStructure
             builder.AppendFormat("</{0}>", Name);
 	        return builder.ToString();
 	    }
-
-	    public XmlWriter<Content> Content<TInput>(string text)
-	    {
-	        return state =>
-	        {
-	            var content = new Content{Text = text};
-                Children.Add(content);
-	            return new Result<Content>(content, state);
-	        };
-        }
-
-	    public XmlWriter<Content> Content<TInput>(Func<TInput, string> func)
-	    {
-	        return state =>
-	        {
-	            var content = new Content { Text = func((TInput)state.CurrentInput) };
-	            Children.Add(content);
-	            return new Result<Content>(content, state);
-	        };
-	    }
-
-	    public XmlWriter<Node> Tag<TInput>(string tag)
-	    {
-	        return state =>
-	        {
-	            var node = new Node { Name = tag };
-	            Children.Add(node);
-	            return new Result<Node>(node, state);
-	        };
-        }
 	}
 }

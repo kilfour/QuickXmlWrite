@@ -1,6 +1,6 @@
 ﻿using QuickXmlWrite.XmlStructure;
 
-namespace QuickXmlWrite
+namespace QuickXmlWrite.UnderTheHood
 {
     public class State
     {

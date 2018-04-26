@@ -1,4 +1,6 @@
-﻿namespace QuickXmlWrite
+﻿using QuickXmlWrite.UnderTheHood;
+
+namespace QuickXmlWrite
 {
     public class Result<TValue> : IResult<TValue>
     {
