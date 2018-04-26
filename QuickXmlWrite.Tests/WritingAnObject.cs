@@ -27,8 +27,8 @@ namespace QuickXmlWrite.Tests
         {
             var writer =
                 from root in XmlWrite<MyThing>.Tag("root")
-                from myStringContent in root.Tag("string").Content<MyThing>(x => x.MyString)
-                from myIntContent in root.Tag("int").Content<MyThing>(x => x.MyInt.ToString())
+                from myStringContent in root.Tag("string").Content(x => x.MyString)
+                from myIntContent in root.Tag("int").Content(x => x.MyInt.ToString())
                 select root;
             var expected = "<root><string>some text</string><int>42</int></root>";
 
