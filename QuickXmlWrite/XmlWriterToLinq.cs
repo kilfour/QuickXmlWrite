@@ -1,0 +1,46 @@
+﻿using System;
+
+namespace QuickXmlWrite
+{
+    public static class XmlWriterToLinq
+    {
+        public static XmlWriter<TValueTwo, TInput> Select<TValueOne, TValueTwo, TInput>(
+            this XmlWriter<TValueOne, TInput> generator,
+            Func<TValueOne, TValueTwo> selector)
+        {
+            if (generator == null)
+                throw new ArgumentNullException(nameof(generator));
+            if (selector == null)
+                throw new ArgumentNullException(nameof(selector));
+
+            return s => new Result<TValueTwo>(selector(generator(s).Value), s);
+        }
+
+        public static XmlWriter<TValueTwo, TInput> SelectMany<TValueOne, TValueTwo, TInput>(
+            this XmlWriter<TValueOne, TInput> generator,
+            Func<TValueOne, XmlWriter<TValueTwo, TInput>> selector)
+        {
+            if (generator == null)
+                throw new ArgumentNullException(nameof(generator));
+            if (selector == null)
+                throw new ArgumentNullException(nameof(selector));
+
+            return s => selector(generator(s).Value)(s);
+        }
+
+        public static XmlWriter<TValueThree, TInput> SelectMany<TValueOne, TValueTwo, TValueThree, TInput>(
+            this XmlWriter<TValueOne, TInput> generator,
+            Func<TValueOne, XmlWriter<TValueTwo, TInput>> selector,
+            Func<TValueOne, TValueTwo, TValueThree> projector)
+        {
+            if (generator == null)
+                throw new ArgumentNullException(nameof(generator));
+            if (selector == null)
+                throw new ArgumentNullException(nameof(selector));
+            if (projector == null)
+                throw new ArgumentNullException(nameof(projector));
+
+            return generator.SelectMany(x => selector(x).Select(y => projector(x, y)));
+        }
+    }
+}

@@ -3,3 +3,8 @@
 ################################################################################
 
 *.user
+/.vs/QuickXmlWrite/v15
+/QuickXmlWrite/bin/Debug
+/QuickXmlWrite/obj/Debug
+/QuickXmlWrite.Tests/bin/Debug
+/QuickXmlWrite.Tests/obj/Debug
