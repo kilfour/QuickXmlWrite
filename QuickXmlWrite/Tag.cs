@@ -6,7 +6,7 @@ namespace QuickXmlWrite
 {
     public static class XmlWrite<TInput>
     {
-        public static XmlWriter<Node, TInput> Tag(string tag)
+        public static XmlWriter<Node> Tag(string tag)
         {
             return 
                 state =>
@@ -16,7 +16,7 @@ namespace QuickXmlWrite
                 };
         }
 
-        public static XmlWriter<Node, TInput> Tag(Func<object, string> func)
+        public static XmlWriter<Node> Tag(Func<object, string> func)
         {
             return
                 state =>

@@ -4,8 +4,8 @@ namespace QuickXmlWrite
 {
     public static class XmlWriterToLinq
     {
-        public static XmlWriter<TValueTwo, TInput> Select<TValueOne, TValueTwo, TInput>(
-            this XmlWriter<TValueOne, TInput> generator,
+        public static XmlWriter<TValueTwo> Select<TValueOne, TValueTwo>(
+            this XmlWriter<TValueOne> generator,
             Func<TValueOne, TValueTwo> selector)
         {
             if (generator == null)
@@ -16,9 +16,9 @@ namespace QuickXmlWrite
             return s => new Result<TValueTwo>(selector(generator(s).Value), s);
         }
 
-        public static XmlWriter<TValueTwo, TInput> SelectMany<TValueOne, TValueTwo, TInput>(
-            this XmlWriter<TValueOne, TInput> generator,
-            Func<TValueOne, XmlWriter<TValueTwo, TInput>> selector)
+        public static XmlWriter<TValueTwo> SelectMany<TValueOne, TValueTwo>(
+            this XmlWriter<TValueOne> generator,
+            Func<TValueOne, XmlWriter<TValueTwo>> selector)
         {
             if (generator == null)
                 throw new ArgumentNullException(nameof(generator));
@@ -28,9 +28,9 @@ namespace QuickXmlWrite
             return s => selector(generator(s).Value)(s);
         }
 
-        public static XmlWriter<TValueThree, TInput> SelectMany<TValueOne, TValueTwo, TValueThree, TInput>(
-            this XmlWriter<TValueOne, TInput> generator,
-            Func<TValueOne, XmlWriter<TValueTwo, TInput>> selector,
+        public static XmlWriter<TValueThree> SelectMany<TValueOne, TValueTwo, TValueThree>(
+            this XmlWriter<TValueOne> generator,
+            Func<TValueOne, XmlWriter<TValueTwo>> selector,
             Func<TValueOne, TValueTwo, TValueThree> projector)
         {
             if (generator == null)

@@ -2,7 +2,7 @@
 
 namespace QuickXmlWrite
 {
-    public delegate IResult<TOutput> XmlWriter<out TOutput, in TInput>(State input);
+    public delegate IResult<TOutput> XmlWriter<out TOutput>(State input);
 
     public class XmlWriterNode
     {

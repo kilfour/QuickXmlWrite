@@ -34,7 +34,7 @@ namespace QuickXmlWrite.XmlStructure
 	        return builder.ToString();
 	    }
 
-	    public XmlWriter<Content, TInput> Content<TInput>(string text)
+	    public XmlWriter<Content> Content<TInput>(string text)
 	    {
 	        return state =>
 	        {
@@ -44,7 +44,7 @@ namespace QuickXmlWrite.XmlStructure
 	        };
         }
 
-	    public XmlWriter<Content, TInput> Content<TInput>(Func<TInput, string> func)
+	    public XmlWriter<Content> Content<TInput>(Func<TInput, string> func)
 	    {
 	        return state =>
 	        {
@@ -54,7 +54,7 @@ namespace QuickXmlWrite.XmlStructure
 	        };
 	    }
 
-	    public XmlWriter<Node, TInput> Tag<TInput>(string tag)
+	    public XmlWriter<Node> Tag<TInput>(string tag)
 	    {
 	        return state =>
 	        {

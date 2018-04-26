@@ -5,7 +5,7 @@ namespace QuickXmlWrite
 {
     public static partial class XmlWriteExt
     {
-        public static XmlWriter<Content, TInput> Content<TInput>(this XmlWriter<Node, TInput> writer, Func<TInput, string> func)
+        public static XmlWriter<Content> Content<TInput>(this XmlWriter<Node> writer, Func<TInput, string> func)
         {
             return
                 state =>
