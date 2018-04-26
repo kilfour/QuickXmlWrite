@@ -1,21 +1,34 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using System.Linq.Expressions;
+using Xunit;
+using Xunit.Sdk;
 
 namespace QuickXmlWrite.Tests
 {
     public class WritingAListOfInts
     {
-        [Fact(Skip="WIP")]
-        public void Verbose()
+        [Fact]
+        public void Composed()
+        {
+            var intWriter = XmlWrite<int>.Tag("int").Content(x => x.ToString());
+            var writer =
+                from root in XmlWrite<List<int>>.Tag("root")
+                from sub in intWriter.Many()
+                select root;
+            var expected = "<root><int>42</int><int>666</int></root>";
+            var actual = writer.Write(new[] {42, 666});
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact (Skip = "WIP")]
+        public void Inline()
         {
             var writer =
-                from root in XmlWrite<int>.Tag("root")
-                from tag in root.Tag("int").Content(x => x.ToString())
+                from root in XmlWrite<List<int>>.Tag("root")
+                from sub in root.Tag("int").Content(x => x.ToString()).Many()
                 select root;
-
-            var expected = "<root><string>some text</string><int>42</int></root>";
-
-            
-            var actual = writer.Write(42);
+            var expected = "<root><int>42</int><int>666</int></root>";
+            var actual = writer.Write(new[] { 42, 666 });
             Assert.Equal(expected, actual);
         }
     }
