@@ -18,12 +18,13 @@ namespace QuickXmlWrite.Tests
             Assert.Equal(expected, actual);
         }
 
-        [Fact (Skip = "WIP")]
+        [Fact]
         public void Inline()
         {
             var writer =
                 from root in XmlWrite<List<int>>.Tag("root")
-                from sub in root.Tag("int").Content(x => x.ToString()).Many()
+                let intWriter = XmlWrite<int>.Tag("int").Content(x => x.ToString())
+                from sub in intWriter.Many()
                 select root;
             var expected = "<root><int>42</int><int>666</int></root>";
             var actual = writer.Write(new[] { 42, 666 });

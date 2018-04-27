@@ -49,6 +49,7 @@
     <Compile Include="WritingADictionary.cs" />
     <Compile Include="WritingAListOfDictionaries.cs" />
     <Compile Include="WritingAListOfInts.cs" />
+    <Compile Include="WritingAListOfStrings.cs" />
     <Compile Include="WritingAnObject.cs" />
   </ItemGroup>
   <ItemGroup>

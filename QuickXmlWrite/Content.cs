@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using QuickXmlWrite.UnderTheHood;
 using QuickXmlWrite.XmlStructure;
 
