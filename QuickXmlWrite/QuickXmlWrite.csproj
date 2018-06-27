@@ -48,6 +48,7 @@
     <Compile Include="XmlStructure\Item.cs" />
     <Compile Include="XmlStructure\Node.cs" />
     <Compile Include="UnderTheHood\XmlWriterNode.cs" />
+    <Compile Include="XmlWrite.cs" />
     <Compile Include="XmlWriterToLinq.cs" />
     <Compile Include="UnderTheHood\IResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

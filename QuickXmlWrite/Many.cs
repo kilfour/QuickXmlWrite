@@ -7,7 +7,7 @@ namespace QuickXmlWrite
 {
     public static partial class XmlWriteExt
     {
-        public static XmlWriter<object> Many<TInput>(this XmlWriter<TInput> writer)
+        public static XmlWriter<XmlWriterNode<TInput>> Many<TInput>(this XmlWriter<TInput> writer)
         {
             return
                 state =>
@@ -25,10 +25,10 @@ namespace QuickXmlWrite
                 };
         }
 
-        public static XmlWriter<object> Many<TInput, TOut>(
+        public static XmlWriter<XmlWriterNode<TInput>> Many<TInput, TOut>(
             this XmlWriterNode<TInput> writer, 
             Func<TInput, IEnumerable<TOut>> func, 
-            XmlWriter<object> innerWriter)
+            XmlWriter<XmlWriterNode<TOut>> innerWriter)
         {
             return
                 state =>
@@ -47,10 +47,10 @@ namespace QuickXmlWrite
                 };
         }
 
-        public static XmlWriter<object> Many<TInput, TOut>(
+        public static XmlWriter<XmlWriterNode<TInput>> Many<TInput, TOut>(
             this XmlWriterNode<TInput> writer,
             Func<TInput, IEnumerable<TOut>> func,
-            Func<XmlWriter<XmlWriterNode<TOut>>, XmlWriter<object>> innerWriterAction)
+            Func<XmlWriter<XmlWriterNode<TOut>>, XmlWriter<XmlWriterNode<TOut>>> innerWriterAction)
         {
             return
                 state =>
@@ -74,7 +74,7 @@ namespace QuickXmlWrite
         public static XmlWriter<XmlWriterNode<TInput>> Many<TInput, TOut>(
             this XmlWriter<XmlWriterNode<TInput>> writer,
             Func<TInput, IEnumerable<TOut>> func,
-            XmlWriter<object> innerWriter)
+            XmlWriter<XmlWriterNode<TInput>> innerWriter)
         {
             return
                 state =>
@@ -96,10 +96,10 @@ namespace QuickXmlWrite
                 };
         }
 
-        public static XmlWriter<object> Many<TInput, TOut>(
+        public static XmlWriter<XmlWriterNode<TInput>> Many<TInput, TOut>(
             this XmlWriter<XmlWriterNode<TInput>> writer,
             Func<TInput, IEnumerable<TOut>> func,
-            Func<XmlWriter<XmlWriterNode<TOut>>, XmlWriter<object>> innerWriterAction)
+            Func<XmlWriter<XmlWriterNode<TOut>>, XmlWriter<XmlWriterNode<TOut>>> innerWriterAction)
         {
             return
                 state =>

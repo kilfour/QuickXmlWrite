@@ -7,10 +7,10 @@ namespace QuickXmlWrite.Tests
         [Fact]
         public void OneLevel()
         {
-            var intWriter = XmlWrite<int>.Tag("int").Content(x => x.ToString());
+            var intWriter = XmlWrite.For<int>().Tag("int").Content(x => x.ToString());
 
             var writer =
-                from root in XmlWrite<int>.Tag("root")
+                from root in XmlWrite.For<int>().Tag("root")
                 from sub in intWriter
                 select root;
 
@@ -22,15 +22,15 @@ namespace QuickXmlWrite.Tests
         [Fact]
         public void TwoLevels()
         {
-            var intWriter = XmlWrite<int>.Tag("int").Content(x => x.ToString());
+            var intWriter = XmlWrite.For<int>().Tag("int").Content(x => x.ToString());
 
             var subWriter =
-                from root in XmlWrite<int>.Tag("sub")
+                from root in XmlWrite.For<int>().Tag("sub")
                 from sub in intWriter
                 select root;
 
             var writer =
-                from root in XmlWrite<int>.Tag("root")
+                from root in XmlWrite.For<int>().Tag("root")
                 from sub in subWriter
                 select root;
 

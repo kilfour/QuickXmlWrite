@@ -8,7 +8,8 @@ namespace QuickXmlWrite.Tests
         public void Verbose()
         {
             var writer =
-                from root in XmlWrite<MyThing>.Tag("root")
+                from input in XmlWrite.For<MyThing>()
+                from root in input.Tag("root")
                 from myString in root.Tag("string")
                 from myStringContent in myString.Content(x => x.MyString)
                 from myInt in root.Tag("int")
@@ -25,7 +26,7 @@ namespace QuickXmlWrite.Tests
         public void LessVerbose()
         {
             var writer =
-                from root in XmlWrite<MyThing>.Tag("root")
+                from root in XmlWrite.For<MyThing>().Tag("root")
                 from myStringContent in root.Tag("string").Content(x => x.MyString)
                 from myIntContent in root.Tag("int").Content(x => x.MyInt.ToString())
                 select root;

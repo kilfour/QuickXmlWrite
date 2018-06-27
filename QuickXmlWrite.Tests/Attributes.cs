@@ -8,7 +8,8 @@ namespace QuickXmlWrite.Tests
         public void HardCoded()
         {
             var writer =
-                from root in XmlWrite<string>.Tag("root")
+                from input in XmlWrite.For<string>()
+                from root in input.Tag("root")
                 from child in root.Tag("child")
                 from content in child.Attribute("theName", "TheValue")
                 select root;
@@ -21,7 +22,7 @@ namespace QuickXmlWrite.Tests
         public void Dynamic()
         {
             var writer =
-                from root in XmlWrite<string>.Tag("root")
+                from root in XmlWrite.For<string>().Tag("root")
                 from child in root.Tag("child")
                 from content in child.Attribute("theName", x => x)
                 select root;
@@ -33,9 +34,7 @@ namespace QuickXmlWrite.Tests
         [Fact]
         public void ChainedDynamic()
         {
-            var writer =
-                from root in XmlWrite<string>.Tag("root").Attribute("theName", x => x)
-                select root;
+            var writer = XmlWrite.For<string>().Tag("root").Attribute("theName", x => x);
             var expected = "<root theName=\"yep\" />";
             var actual = writer.Write("yep");
             Assert.Equal(expected, actual);

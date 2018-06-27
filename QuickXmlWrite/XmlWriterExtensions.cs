@@ -5,7 +5,7 @@ namespace QuickXmlWrite
 {
     public static class XmlWriterExtensions
     {
-        public static string Write<T, TInput>(this XmlWriter<T> writer, TInput input)
+        public static string Write<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, TInput input)
         {
             var state = new State();
             state.CurrentInput = input;

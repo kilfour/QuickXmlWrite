@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 using QuickXmlWrite.XmlStructure;
 
 namespace QuickXmlWrite.UnderTheHood
@@ -54,9 +55,18 @@ namespace QuickXmlWrite.UnderTheHood
         {
             return state =>
             {
-                var newnode = new Node { Name = tag };
-                Node.Children.Add(newnode);
-                return new Result<XmlWriterNode<TInput>>(new XmlWriterNode<TInput>(newnode), state);
+                if (Node == null)
+                {
+                    state.AppendTag(tag);
+                    return Result<TInput>.FromState(state);
+                }
+                else
+                {
+                    var newnode = new Node { Name = tag };
+                    Node.Children.Add(newnode);
+                    return new Result<XmlWriterNode<TInput>>(new XmlWriterNode<TInput>(newnode), state);
+                }
+                
             };
         }
 

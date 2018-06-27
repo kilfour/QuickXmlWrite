@@ -8,7 +8,7 @@ namespace QuickXmlWrite.Tests
         public void TagAndContent()
         {
             var writer =
-                from root in XmlWrite<string>.Tag("root").Content("content")
+                from root in XmlWrite.For<string>().Tag("root").Content("content")
                 select root;
             var expected = "<root>content</root>";
             var actual = writer.Write("");
@@ -19,7 +19,7 @@ namespace QuickXmlWrite.Tests
         public void TwoTagsAndContent()
         {
             var writer =
-                from root in XmlWrite<string>.Tag("root").Tag("child").Content("content")
+                from root in XmlWrite.For<string>().Tag("root").Tag("child").Content("content")
                 select root;
 
             var expected = "<root><child>content</child></root>";
@@ -31,7 +31,7 @@ namespace QuickXmlWrite.Tests
         public void PassedOn()
         {
             var writer =
-                from root in XmlWrite<string>.Tag("root")
+                from root in XmlWrite.For<string>().Tag("root")
                 from odTitle in root.Tag("child").Tag("grandchild").Content("content")
                 select root;
             
