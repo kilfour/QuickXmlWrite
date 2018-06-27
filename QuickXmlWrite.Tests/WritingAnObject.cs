@@ -1,5 +1,4 @@
-﻿using System.CodeDom;
-using Xunit;
+﻿using Xunit;
 
 namespace QuickXmlWrite.Tests
 {

@@ -1,6 +1,4 @@
-﻿using QuickXmlWrite.UnderTheHood;
-
-namespace QuickXmlWrite
+﻿namespace QuickXmlWrite.UnderTheHood
 {
     public delegate IResult<TOutput> XmlWriter<out TOutput>(State input);
 }

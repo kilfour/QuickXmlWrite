@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuickXmlWrite.UnderTheHood;
+using System;
 
 namespace QuickXmlWrite
 {

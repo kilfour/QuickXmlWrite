@@ -49,12 +49,12 @@
     <Compile Include="XmlStructure\Node.cs" />
     <Compile Include="UnderTheHood\XmlWriterNode.cs" />
     <Compile Include="XmlWriterToLinq.cs" />
-    <Compile Include="IResult.cs" />
+    <Compile Include="UnderTheHood\IResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Result.cs" />
+    <Compile Include="UnderTheHood\Result.cs" />
     <Compile Include="UnderTheHood\State.cs" />
     <Compile Include="Tag.cs" />
-    <Compile Include="XmlWriter.cs" />
+    <Compile Include="UnderTheHood\XmlWriter.cs" />
     <Compile Include="XmlWriterExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
