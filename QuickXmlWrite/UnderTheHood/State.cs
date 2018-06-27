@@ -26,5 +26,10 @@ namespace QuickXmlWrite.UnderTheHood
         {
             return document.Root.AsString();
         }
+
+        public void AppendAttribute(string name, string value)
+        {
+            Current.Attributes.Add(name, value);
+        }
     }
 }

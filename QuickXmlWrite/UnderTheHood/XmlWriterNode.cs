@@ -32,6 +32,24 @@ namespace QuickXmlWrite.UnderTheHood
             };
         }
 
+        public XmlWriter<XmlWriterNode<TInput>> Attribute(string name, string value)
+        {
+            return state =>
+            {
+                Node.Attributes.Add(name, value);
+                return new Result<XmlWriterNode<TInput>>(this, state);
+            };
+        }
+
+        public XmlWriter<XmlWriterNode<TInput>> Attribute(string name, Func<TInput, string> func)
+        {
+            return state =>
+            {
+                Node.Attributes.Add(name, func((TInput)state.CurrentInput));
+                return new Result<XmlWriterNode<TInput>>(this, state);
+            };
+        }
+
         public XmlWriter<XmlWriterNode<TInput>> Tag(string tag)
         {
             return state =>

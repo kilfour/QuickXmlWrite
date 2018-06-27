@@ -12,5 +12,10 @@ namespace QuickXmlWrite
         {
             return State.AsString();
         }
+
+        public static Result<XmlWriterNode<TValue>> FromState(State state)
+        {
+            return new Result<XmlWriterNode<TValue>>(new XmlWriterNode<TValue>(state.Current), state);
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace QuickXmlWrite.Tests
             var writer =
                 from root in XmlWrite<string>.Tag("root")
                 select root;
-            var expected = "<root></root>";
+            var expected = "<root />";
             var actual = writer.Write("");
            Assert.Equal(expected, actual); 
         }
@@ -21,7 +21,7 @@ namespace QuickXmlWrite.Tests
             var writer =
                 from root in XmlWrite<string>.Tag(x => x)
                 select root;
-            var expected = "<dynamic></dynamic>";
+            var expected = "<dynamic />";
             var actual = writer.Write("dynamic");
             Assert.Equal(expected, actual);
         }

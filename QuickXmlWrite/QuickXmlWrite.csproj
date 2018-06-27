@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Content.cs" />
     <Compile Include="Many.cs" />
+    <Compile Include="Attribute.cs" />
     <Compile Include="XmlStructure\Content.cs" />
     <Compile Include="XmlStructure\Document.cs" />
     <Compile Include="XmlStructure\Item.cs" />

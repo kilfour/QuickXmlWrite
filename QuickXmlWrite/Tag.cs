@@ -12,7 +12,7 @@ namespace QuickXmlWrite
                 state =>
                 {
                     state.AppendTag(tag);
-                    return new Result<XmlWriterNode<TInput>>(new XmlWriterNode<TInput>(state.Current as Node), state);
+                    return new Result<XmlWriterNode<TInput>>(new XmlWriterNode<TInput>(state.Current), state);
                 };
         }
 
@@ -22,7 +22,34 @@ namespace QuickXmlWrite
                 state =>
                 {
                     state.AppendTag(func((TInput)state.CurrentInput));
-                    return new Result<XmlWriterNode<TInput>>(new XmlWriterNode<TInput>(state.Current as Node), state);
+                    return Result<TInput>.FromState(state);
+                };
+        }
+    }
+
+    public static partial class XmlWrite
+    {
+        public static XmlWriter<XmlWriterNode<TInput>> Tag<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, Func<TInput, string> func)
+        {
+            return
+                state =>
+                {
+                    var result = writer(state);
+                    state.Current = result.Value.Node;
+                    state.AppendTag(func((TInput)state.CurrentInput));
+                    return Result<TInput>.FromState(state);
+                };
+        }
+
+        public static XmlWriter<XmlWriterNode<TInput>> Tag<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, string tag)
+        {
+            return
+                state =>
+                {
+                    var result = writer(state);
+                    state.Current = result.Value.Node;
+                    state.AppendTag(tag);
+                    return Result<TInput>.FromState(state);
                 };
         }
     }

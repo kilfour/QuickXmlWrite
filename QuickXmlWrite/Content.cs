@@ -6,7 +6,7 @@ namespace QuickXmlWrite
 {
     public static partial class XmlWriteExt
     {
-        public static XmlWriter<Content> Content<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, Func<TInput, string> func)
+        public static XmlWriter<XmlWriterNode<TInput>> Content<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, Func<TInput, string> func)
         {
             return
                 state =>
@@ -14,7 +14,19 @@ namespace QuickXmlWrite
                     var result = writer(state);
                     var content = new Content { Text = func((TInput)state.CurrentInput) };
                     result.Value.Node.Children.Add(content);
-                    return new Result<Content>(content, state);
+                    return Result<TInput>.FromState(state);
+                };
+        }
+
+        public static XmlWriter<XmlWriterNode<TInput>> Content<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, string value)
+        {
+            return
+                state =>
+                {
+                    var result = writer(state);
+                    var content = new Content { Text = value };
+                    result.Value.Node.Children.Add(content);
+                    return Result<TInput>.FromState(state);
                 };
         }
     }

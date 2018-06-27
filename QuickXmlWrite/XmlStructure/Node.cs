@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Text;
 
 namespace QuickXmlWrite.XmlStructure
@@ -25,7 +24,12 @@ namespace QuickXmlWrite.XmlStructure
 	        {
                 builder.AppendFormat(" {0}=\"{1}\"", attribute.Key, attribute.Value);
 	        }
-	        builder.Append(">");
+	        if (Children.Count == 0)
+	        {
+	            builder.Append(" />");
+	            return builder.ToString();
+            }
+            builder.Append(">");
 	        foreach (var child in Children)
 	        {
 	            builder.Append(child.AsString());

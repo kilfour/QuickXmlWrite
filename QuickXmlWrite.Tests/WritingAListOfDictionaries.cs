@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace QuickXmlWrite.Tests
@@ -45,14 +46,37 @@ namespace QuickXmlWrite.Tests
             Assert.Equal(expected, writer.Write(input));
         }
 
-        [Fact (Skip="WIP")]
+        [Fact ]
         public void BetterInline()
         {
             var writer =
-                from root in XmlWrite<IEnumerable<IEnumerable<KeyValuePair<string, string>>>>.Tag("root")
-                from dict in root.ApplyMany(x => x.Tag("dict"))
-                from kv in dict.ApplyMany(x => x.Tag(y => y.Key).Content(y => y.Value))
+                XmlWrite<List<Dictionary<string, string>>>.Tag("root")
+                    .Many(x => x, XmlWrite<Dictionary<string, string>>.Tag("dict")
+                        .Many(x => x.ToList(), XmlWrite<KeyValuePair<string, string>>.Tag(x => x.Key).Content(x => x.Value)));
+
+            Assert.Equal(expected, writer.Write(input));
+        }
+
+        [Fact]
+        public void BetterInlineTyped()
+        {
+            var writer =
+                XmlWrite<List<Dictionary<string, string>>>.Tag("root")
+                    .Many(list => list, dict => dict.Tag("dict")
+                        .Many(x => x.ToList(), kv => kv.Tag(x => x.Key).Content(x => x.Value)));
+
+            Assert.Equal(expected, writer.Write(input));
+        }
+
+        [Fact]
+        public void BetterInlineTypedComposed()
+        {
+            var writer =
+                from root in XmlWrite<List<Dictionary<string, string>>>.Tag("root")
+                from subs in root.Many(list => list, dict => dict.Tag("dict")
+                        .Many(x => x.ToList(), kv => kv.Tag(x => x.Key).Content(x => x.Value)))
                 select root;
+
             Assert.Equal(expected, writer.Write(input));
         }
     }
