@@ -6,7 +6,7 @@ namespace QuickXmlWrite.XmlStructure
 	public class Node : Item
 	{
 		public string Name;
-		public List<Item> Children;
+		private List<Item> Children;
 		public Dictionary<string, string> Attributes;
 
 	    public Node()
@@ -15,6 +15,12 @@ namespace QuickXmlWrite.XmlStructure
 	        Attributes = new Dictionary<string, string>();
 
         }
+
+	    public void Add(Item item)
+	    {
+	        item.Parent = this;
+            Children.Add(item);
+	    }
 
 	    public override string AsString()
 	    {

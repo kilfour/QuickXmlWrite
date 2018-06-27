@@ -13,7 +13,7 @@ namespace QuickXmlWrite
                 {
                     var result = writer(state);
                     var content = new Content { Text = func((TInput)state.CurrentInput) };
-                    result.Value.Node.Children.Add(content);
+                    result.Value.Node.Add(content);
                     return Result<TInput>.FromState(state);
                 };
         }
@@ -25,7 +25,7 @@ namespace QuickXmlWrite
                 {
                     var result = writer(state);
                     var content = new Content { Text = value };
-                    result.Value.Node.Children.Add(content);
+                    result.Value.Node.Add(content);
                     return Result<TInput>.FromState(state);
                 };
         }

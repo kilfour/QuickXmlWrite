@@ -13,23 +13,23 @@ namespace QuickXmlWrite.UnderTheHood
             this.Node = node;
         }
 
-        public XmlWriter<Content> Content(string text)
+        public XmlWriter<XmlWriterNode<TInput>> Content(string text)
         {
             return state =>
             {
                 var content = new Content { Text = text };
-                Node.Children.Add(content);
-                return new Result<Content>(content, state);
+                Node.Add(content);
+                return new Result<XmlWriterNode<TInput>>(this, state);
             };
         }
 
-        public XmlWriter<Content> Content(Func<TInput, string> func)
+        public XmlWriter<XmlWriterNode<TInput>> Content(Func<TInput, string> func)
         {
             return state =>
             {
                 var content = new Content { Text = func((TInput)state.CurrentInput) };
-                Node.Children.Add(content);
-                return new Result<Content>(content, state);
+                Node.Add(content);
+                return new Result<XmlWriterNode<TInput>>(this, state);
             };
         }
 
@@ -60,13 +60,9 @@ namespace QuickXmlWrite.UnderTheHood
                     state.AppendTag(tag);
                     return Result<TInput>.FromState(state);
                 }
-                else
-                {
-                    var newnode = new Node { Name = tag };
-                    Node.Children.Add(newnode);
-                    return new Result<XmlWriterNode<TInput>>(new XmlWriterNode<TInput>(newnode), state);
-                }
-                
+                var newnode = new Node { Name = tag };
+                Node.Add(newnode);
+                return new Result<XmlWriterNode<TInput>>(new XmlWriterNode<TInput>(newnode), state);
             };
         }
 
@@ -74,8 +70,13 @@ namespace QuickXmlWrite.UnderTheHood
         {
             return state =>
             {
+                if (Node == null)
+                {
+                    state.AppendTag(func((TInput)state.CurrentInput));
+                    return Result<TInput>.FromState(state);
+                }
                 var newnode = new Node { Name = func((TInput)state.CurrentInput) };
-                Node.Children.Add(newnode);
+                Node.Add(newnode);
                 return new Result<XmlWriterNode<TInput>>(new XmlWriterNode<TInput>(newnode), state);
             };
         }

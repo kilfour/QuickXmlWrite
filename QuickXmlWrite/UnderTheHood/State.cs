@@ -17,7 +17,7 @@ namespace QuickXmlWrite.UnderTheHood
             }
             else
             {
-                Current.Children.Add(node);
+                Current.Add(node);
             }
             Current = node;
         }

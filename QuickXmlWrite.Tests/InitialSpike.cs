@@ -39,6 +39,17 @@ namespace QuickXmlWrite.Tests
         }
 
         [Fact]
+        public void Up()
+        {
+            var writer =
+                from root in XmlWrite.For<string>().Tag("root").Tag("1").Up().Tag("2")
+                select root;
+            var expected = "<root><1 /><2 /></root>";
+            var actual = writer.Write("");
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void WithDynamicContent()
         {
             var writer =
