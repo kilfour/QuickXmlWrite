@@ -1,11 +1,12 @@
-﻿using Xunit;
+﻿using QuickXmlWrite.UnderTheHood;
+using Xunit;
 
 namespace QuickXmlWrite.Tests
 {
     public class MultipleChildTagsInlined
     {
         [Fact]
-        public void JustTheRoot()
+        public void Fluent()
         {
             var writer =
                 XmlWrite.For<MyThing>()
@@ -18,6 +19,8 @@ namespace QuickXmlWrite.Tests
             var actual = writer.Write(new MyThing());
             Assert.Equal(expected, actual);
         }
+
+        private XmlWriterAction<MyThing> foo = x => x.Tag("fred");
 
         public class MyThing
         {

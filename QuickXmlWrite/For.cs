@@ -1,5 +1,4 @@
-﻿using System;
-using QuickXmlWrite.UnderTheHood;
+﻿using QuickXmlWrite.UnderTheHood;
 
 namespace QuickXmlWrite
 {
@@ -7,7 +6,7 @@ namespace QuickXmlWrite
     {
         public static XmlWriter<XmlWriterNode<TInput>> For<TInput>()
         {
-            return Result<TInput>.FromState;
+            return Result<TInput>.WriterNodeResultFromState;
         }
     }
 }

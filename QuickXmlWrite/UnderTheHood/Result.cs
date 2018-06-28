@@ -2,7 +2,7 @@
 {
     public class Result<TValue> : IResult<TValue>
     {
-        public TValue Value { get; private set; }
+        public TValue Value { get; }
         public readonly State State;
         public Result(TValue value, State state) { Value = value; State = state; }
 
@@ -11,7 +11,7 @@
             return State.AsString();
         }
 
-        public static Result<XmlWriterNode<TValue>> FromState(State state)
+        public static Result<XmlWriterNode<TValue>> WriterNodeResultFromState(State state)
         {
             return new Result<XmlWriterNode<TValue>>(new XmlWriterNode<TValue>(state.Current), state);
         }

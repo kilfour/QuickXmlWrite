@@ -41,22 +41,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Content.cs" />
+    <Compile Include="Sequence.cs" />
     <Compile Include="Many.cs" />
     <Compile Include="Attribute.cs" />
+    <Compile Include="Up.cs" />
     <Compile Include="XmlStructure\Content.cs" />
     <Compile Include="XmlStructure\Document.cs" />
     <Compile Include="XmlStructure\Item.cs" />
     <Compile Include="XmlStructure\Node.cs" />
     <Compile Include="UnderTheHood\XmlWriterNode.cs" />
-    <Compile Include="XmlWrite.cs" />
+    <Compile Include="For.cs" />
+    <Compile Include="XmlWriterAction.cs" />
     <Compile Include="XmlWriterToLinq.cs" />
     <Compile Include="UnderTheHood\IResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnderTheHood\Result.cs" />
     <Compile Include="UnderTheHood\State.cs" />
     <Compile Include="Tag.cs" />
-    <Compile Include="UnderTheHood\XmlWriter.cs" />
-    <Compile Include="XmlWriterExtensions.cs" />
+    <Compile Include="XmlWriter.cs" />
+    <Compile Include="Write.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
