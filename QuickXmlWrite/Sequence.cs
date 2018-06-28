@@ -25,7 +25,5 @@ namespace QuickXmlWrite
                     return Result<TInput>.WriterNodeResultFromState(state);
                 };
         }
-
-        
     }
 }

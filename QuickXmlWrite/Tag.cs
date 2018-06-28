@@ -6,18 +6,14 @@ namespace QuickXmlWrite
 {
     public static partial class XmlWriteExtensions
     {
-        private static void AppendTag(State state, string tag)
+        public static XmlWriter<XmlWriterNode<TInput>> Tag<TInput>(this XmlWriterNode<TInput> writerNode, string tag)
         {
-            var node = new Node { Name = tag };
-            if (state.Document.Root == null)
-            {
-                state.Document.Root = node;
-            }
-            else
-            {
-                state.Current.Add(node);
-            }
-            state.Current = node;
+            return state => AppendTag(state, writerNode, tag);
+        }
+
+        public static XmlWriter<XmlWriterNode<TInput>> Tag<TInput>(this XmlWriterNode<TInput> writerNode, Func<TInput, string> func)
+        {
+            return state => AppendTag(state, writerNode, state.GetValue(func));
         }
 
         private static IResult<XmlWriterNode<TInput>> AppendTag<TInput>( State state, XmlWriterNode<TInput> writerNode, string tag)
@@ -32,14 +28,14 @@ namespace QuickXmlWrite
             return new Result<XmlWriterNode<TInput>>(new XmlWriterNode<TInput>(newnode), state);
         }
 
-        public static XmlWriter<XmlWriterNode<TInput>> Tag<TInput>(this XmlWriterNode<TInput> writerNode, string tag)
+        public static XmlWriter<XmlWriterNode<TInput>> Tag<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, string tag)
         {
-            return state => AppendTag(state, writerNode, tag);
+            return state => AppendTag(state, writer, tag);
         }
-        
-        public static XmlWriter<XmlWriterNode<TInput>> Tag<TInput>(this XmlWriterNode<TInput> writerNode, Func<TInput, string> func)
+
+        public static XmlWriter<XmlWriterNode<TInput>> Tag<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, Func<TInput, string> func)
         {
-            return state => AppendTag(state, writerNode, func((TInput)state.CurrentInput));
+            return state => AppendTag(state, writer, state.GetValue(func));
         }
 
         private static IResult<XmlWriterNode<TInput>> AppendTag<TInput>(State state, XmlWriter<XmlWriterNode<TInput>> writer, string tag)
@@ -50,14 +46,18 @@ namespace QuickXmlWrite
             return Result<TInput>.WriterNodeResultFromState(state);
         }
 
-        public static XmlWriter<XmlWriterNode<TInput>> Tag<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, Func<TInput, string> func)
+        private static void AppendTag(State state, string tag)
         {
-            return state => AppendTag(state, writer, func((TInput)state.CurrentInput));
-        }
-
-        public static XmlWriter<XmlWriterNode<TInput>> Tag<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, string tag)
-        {
-            return state => AppendTag(state, writer, tag);
+            var node = new Node { Name = tag };
+            if (state.Document.Root == null)
+            {
+                state.Document.Root = node;
+            }
+            else
+            {
+                state.Current.Add(node);
+            }
+            state.Current = node;
         }
     }
 }

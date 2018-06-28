@@ -8,46 +8,37 @@ namespace QuickXmlWrite
     {
         public static XmlWriter<XmlWriterNode<TInput>> Content<TInput>(this XmlWriterNode<TInput> writerNode, string text)
         {
-            return state =>
-            {
-                var content = new Content { Text = text };
-                writerNode.Node.Add(content);
-                return new Result<XmlWriterNode<TInput>>(writerNode, state);
-            };
+            return state => Content(state, writerNode, text);
         }
 
         public static XmlWriter<XmlWriterNode<TInput>> Content<TInput>(this XmlWriterNode<TInput> writerNode, Func<TInput, string> func)
         {
-            return state =>
-            {
-                var content = new Content { Text = func((TInput)state.CurrentInput) };
-                writerNode.Node.Add(content);
-                return new Result<XmlWriterNode<TInput>>(writerNode, state);
-            };
+            return state => Content(state, writerNode, state.GetValue(func));
         }
 
-        public static XmlWriter<XmlWriterNode<TInput>> Content<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, Func<TInput, string> func)
+        private static IResult<XmlWriterNode<TInput>> Content<TInput>(State state, XmlWriterNode<TInput> writerNode, string text)
         {
-            return
-                state =>
-                {
-                    var result = writer(state);
-                    var content = new Content { Text = func((TInput)state.CurrentInput) };
-                    result.Value.Node.Add(content);
-                    return Result<TInput>.WriterNodeResultFromState(state);
-                };
+            var content = new Content { Text = text };
+            writerNode.Node.Add(content);
+            return new Result<XmlWriterNode<TInput>>(writerNode, state);
         }
 
         public static XmlWriter<XmlWriterNode<TInput>> Content<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, string value)
         {
-            return
-                state =>
-                {
-                    var result = writer(state);
-                    var content = new Content { Text = value };
-                    result.Value.Node.Add(content);
-                    return Result<TInput>.WriterNodeResultFromState(state);
-                };
+            return state => Content(state, writer, value);
+        }
+
+        public static XmlWriter<XmlWriterNode<TInput>> Content<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, Func<TInput, string> func)
+        {
+            return state => Content(state, writer, state.GetValue(func));
+        }
+
+        private static IResult<XmlWriterNode<TInput>> Content<TInput>(State state, XmlWriter<XmlWriterNode<TInput>> writer, string value)
+        {
+            var result = writer(state);
+            var content = new Content {Text = value};
+            result.Value.Node.Add(content);
+            return Result<TInput>.WriterNodeResultFromState(state);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using QuickXmlWrite.XmlStructure;
+﻿using System;
+using QuickXmlWrite.XmlStructure;
 
 namespace QuickXmlWrite.UnderTheHood
 {
@@ -8,6 +9,11 @@ namespace QuickXmlWrite.UnderTheHood
         public Node Current { get; set; }
         public object CurrentInput { get; set; }
         
+        public string GetValue<T>(Func<T, string> func)
+        {
+            return func((T)CurrentInput);
+        }
+
         public string AsString()
         {
             return Document.Root.AsString();
