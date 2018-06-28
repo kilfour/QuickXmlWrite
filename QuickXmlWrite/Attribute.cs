@@ -5,6 +5,11 @@ namespace QuickXmlWrite
 {
     public static partial class XmlWriteExtensions
     {
+        public static void AppendAttribute(State state, string name, string value)
+        {
+            state.Current.Attributes.Add(name, value);
+        }
+
         public static XmlWriter<XmlWriterNode<TInput>> Attribute<TInput>(this XmlWriterNode<TInput> writerNode, string name, string value)
         {
             return state =>
@@ -30,7 +35,7 @@ namespace QuickXmlWrite
                 {
                     var result = writer(state);
                     state.Current = result.Value.Node;
-                    state.AppendAttribute(name, value);
+                    AppendAttribute(state, name, value);
                     return Result<TInput>.WriterNodeResultFromState(state);
                 };
         }
@@ -42,10 +47,9 @@ namespace QuickXmlWrite
                 {
                     var result = writer(state);
                     state.Current = result.Value.Node;
-                    state.AppendAttribute(name, func((TInput)state.CurrentInput));
+                    AppendAttribute(state, name, func((TInput)state.CurrentInput));
                     return Result<TInput>.WriterNodeResultFromState(state);
                 };
-
         }
     }
 }

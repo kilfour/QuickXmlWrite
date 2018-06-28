@@ -4,32 +4,13 @@ namespace QuickXmlWrite.UnderTheHood
 {
     public class State
     {
-        private readonly Document document = new Document();
+        public readonly Document Document = new Document();
         public Node Current { get; set; }
         public object CurrentInput { get; set; }
-
-        public void AppendTag(string tag)
-        {
-            var node = new Node {Name = tag};
-            if (document.Root == null)
-            {
-                document.Root = node;
-            }
-            else
-            {
-                Current.Add(node);
-            }
-            Current = node;
-        }
-
+        
         public string AsString()
         {
-            return document.Root.AsString();
-        }
-
-        public void AppendAttribute(string name, string value)
-        {
-            Current.Attributes.Add(name, value);
+            return Document.Root.AsString();
         }
     }
 }
