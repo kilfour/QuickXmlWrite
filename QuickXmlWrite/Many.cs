@@ -82,8 +82,6 @@ namespace QuickXmlWrite
                     var oldInput = state.CurrentInput;
                     var oldNode = state.Current;
                     var result = writer(state);
-                    
-                    
                     foreach (var element in (IEnumerable)func((TInput)state.CurrentInput))
                     {
                         state.Current = result.Value.Node;

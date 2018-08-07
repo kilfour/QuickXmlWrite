@@ -46,6 +46,7 @@
     <Compile Include="Chaining.cs" />
     <Compile Include="ComposingWriters.cs" />
     <Compile Include="Attributes.cs" />
+    <Compile Include="Conditional.cs" />
     <Compile Include="InitialSpike.cs" />
     <Compile Include="MultipleChildTagsInlined.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

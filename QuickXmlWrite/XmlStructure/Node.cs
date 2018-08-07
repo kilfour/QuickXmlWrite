@@ -32,7 +32,7 @@ namespace QuickXmlWrite.XmlStructure
 	        }
 	        if (Children.Count == 0)
 	        {
-	            builder.Append(" />");
+	            builder.Append("/>");
 	            return builder.ToString();
             }
             builder.Append(">");
