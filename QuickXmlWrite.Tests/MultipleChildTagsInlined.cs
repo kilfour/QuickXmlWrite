@@ -15,12 +15,10 @@ namespace QuickXmlWrite.Tests
                         x => x.Tag("fred"),
                         x => x.Tag("jos"));
 
-            var expected = "<root><fred /><jos /></root>";
+            var expected = "<root><fred/><jos/></root>";
             var actual = writer.Write(new MyThing());
             Assert.Equal(expected, actual);
         }
-
-        private XmlWriterAction<MyThing> foo = x => x.Tag("fred");
 
         public class MyThing
         {

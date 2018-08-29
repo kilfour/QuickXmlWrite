@@ -53,7 +53,7 @@ namespace QuickXmlWrite.Tests
                     from a in c.Attribute("value", x => x)
                     select s)
                 select root;
-            var expected = "<root><name>yep</name><codes><string><code value=\"42\" /></string><string><code value=\"666\" /></string></codes></root>";
+            var expected = "<root><name>yep</name><codes><string><code value=\"42\"/></string><string><code value=\"666\"/></string></codes></root>";
             var actual = writer.Write(thing);
             Assert.Equal(expected, actual);
         }

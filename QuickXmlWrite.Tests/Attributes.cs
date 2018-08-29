@@ -13,7 +13,7 @@ namespace QuickXmlWrite.Tests
                 from child in root.Tag("child")
                 from content in child.Attribute("theName", "TheValue")
                 select root;
-            var expected = "<root><child theName=\"TheValue\" /></root>";
+            var expected = "<root><child theName=\"TheValue\"/></root>";
             var actual = writer.Write("");
             Assert.Equal(expected, actual);
         }
@@ -26,7 +26,7 @@ namespace QuickXmlWrite.Tests
                 from child in root.Tag("child")
                 from content in child.Attribute("theName", x => x)
                 select root;
-            var expected = "<root><child theName=\"yep\" /></root>";
+            var expected = "<root><child theName=\"yep\"/></root>";
             var actual = writer.Write("yep");
             Assert.Equal(expected, actual);
         }
@@ -35,7 +35,7 @@ namespace QuickXmlWrite.Tests
         public void ChainedDynamic()
         {
             var writer = XmlWrite.For<string>().Tag("root").Attribute("theName", x => x);
-            var expected = "<root theName=\"yep\" />";
+            var expected = "<root theName=\"yep\"/>";
             var actual = writer.Write("yep");
             Assert.Equal(expected, actual);
         }
