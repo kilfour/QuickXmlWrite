@@ -38,5 +38,21 @@ namespace QuickXmlWrite.Tests
             var actual = writer.Write(42);
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void HardCodedSubWriter()
+        {
+            var hcWriter = XmlWrite.ForAny().Tag("hard").Content("coded");
+
+
+            var writer =
+                from root in XmlWrite.For<int>().Tag("root")
+                from sub in hcWriter
+                select root;
+
+            var expected = "<root><hard>coded</hard></root>";
+            var actual = writer.Write(42);
+            Assert.Equal(expected, actual);
+        }
     }
 }

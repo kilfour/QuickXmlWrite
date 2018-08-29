@@ -8,5 +8,10 @@ namespace QuickXmlWrite
         {
             return Result<TInput>.WriterNodeResultFromState;
         }
+
+        public static XmlWriter<XmlWriterNode<object>> ForAny()
+        {
+            return Result<object>.WriterNodeResultFromState;
+        }
     }
 }
