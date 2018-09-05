@@ -16,7 +16,7 @@ namespace QuickXmlWrite
             return state => AppendTag(state, writerNode, state.GetValue(func));
         }
 
-        private static IResult<XmlWriterNode<TInput>> AppendTag<TInput>( State state, XmlWriterNode<TInput> writerNode, string tag)
+        private static IResult<XmlWriterNode<TInput>> AppendTag<TInput>(State state, XmlWriterNode<TInput> writerNode, string tag)
         {
             if (writerNode.Node == null)
             {
@@ -25,6 +25,7 @@ namespace QuickXmlWrite
             }
             var newnode = new Node { Name = tag };
             writerNode.Node.Add(newnode);
+            state.Current = newnode;
             return new Result<XmlWriterNode<TInput>>(new XmlWriterNode<TInput>(newnode), state);
         }
 

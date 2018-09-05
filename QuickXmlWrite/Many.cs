@@ -71,28 +71,28 @@ namespace QuickXmlWrite
                 };
         }
 
-        public static XmlWriter<XmlWriterNode<TInput>> Many<TInput, TOut>(
-            this XmlWriter<XmlWriterNode<TInput>> writer,
-            Func<TInput, IEnumerable<TOut>> func,
-            XmlWriter<XmlWriterNode<TInput>> innerWriter)
-        {
-            return
-                state =>
-                {
-                    var oldInput = state.CurrentInput;
-                    var oldNode = state.Current;
-                    var result = writer(state);
-                    foreach (var element in (IEnumerable)func((TInput)state.CurrentInput))
-                    {
-                        state.Current = result.Value.Node;
-                        state.CurrentInput = element;
-                        innerWriter(state);
-                        state.Current = oldNode;
-                    }
-                    state.CurrentInput = oldInput;
-                    return Result<TInput>.WriterNodeResultFromState(state);
-                };
-        }
+        //public static XmlWriter<XmlWriterNode<TInput>> Many<TInput, TOut>(
+        //    this XmlWriter<XmlWriterNode<TInput>> writer,
+        //    Func<TInput, IEnumerable<TOut>> func,
+        //    XmlWriter<XmlWriterNode<TInput>> innerWriter)
+        //{
+        //    return
+        //        state =>
+        //        {
+        //            var oldInput = state.CurrentInput;
+        //            var oldNode = state.Current;
+        //            var result = writer(state);
+        //            foreach (var element in (IEnumerable)func((TInput)state.CurrentInput))
+        //            {
+        //                state.Current = result.Value.Node;
+        //                state.CurrentInput = element;
+        //                innerWriter(state);
+        //                state.Current = oldNode;
+        //            }
+        //            state.CurrentInput = oldInput;
+        //            return Result<TInput>.WriterNodeResultFromState(state);
+        //        };
+        //}
 
         public static XmlWriter<XmlWriterNode<TInput>> Many<TInput, TOut>(
             this XmlWriter<XmlWriterNode<TInput>> writer,
