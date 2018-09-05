@@ -43,6 +43,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Apply.cs" />
     <Compile Include="Chaining.cs" />
     <Compile Include="ComposingWriters.cs" />
     <Compile Include="Attributes.cs" />

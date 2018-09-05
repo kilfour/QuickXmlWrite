@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Apply.cs" />
     <Compile Include="Conditional.cs" />
     <Compile Include="Content.cs" />
     <Compile Include="Sequence.cs" />
