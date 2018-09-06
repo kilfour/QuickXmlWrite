@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace QuickXmlWrite.XmlStructure
@@ -44,10 +45,11 @@ namespace QuickXmlWrite.XmlStructure
 	        return builder.ToString();
 	    }
 
-	    public override string AsHumanReadableString(int level)
+	    public override string AsHumanReadableString(int level, int numberOfSpacesPerLevel)
 	    {
 	        var builder = new StringBuilder();
-	        builder.Append(new string(' ', level * 4));
+            builder.AppendLine();
+            builder.Append(new string(' ', level * numberOfSpacesPerLevel));
 	        builder.AppendFormat("<{0}", Name);
 	        foreach (var attribute in Attributes)
 	        {
@@ -57,17 +59,20 @@ namespace QuickXmlWrite.XmlStructure
 	        {
 	            builder.Append(" />");
 	            builder.AppendLine();
-	            return builder.ToString();
+                return builder.ToString();
 	        }
 	        builder.Append(">");
-	        builder.AppendLine();
             foreach (var child in Children)
 	        {
-	            builder.Append(child.AsHumanReadableString(level + 1));
+	            builder.Append(child.AsHumanReadableString(level + 1, numberOfSpacesPerLevel));
 	        }
-	        builder.Append(new string(' ', level * 4));
+	        var lastChild = Children.Last();
+	        if (lastChild is Node)
+	        {
+	            builder.AppendLine();
+	            builder.Append(new string(' ', level * numberOfSpacesPerLevel));
+            }
             builder.AppendFormat("</{0}>", Name);
-	        builder.AppendLine();
             return builder.ToString();
         }
 	}

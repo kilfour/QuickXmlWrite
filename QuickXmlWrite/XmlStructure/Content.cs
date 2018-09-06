@@ -8,7 +8,7 @@
 	        return Text;
 	    }
 
-	    public override string AsHumanReadableString(int level)
+	    public override string AsHumanReadableString(int level, int numberOfSpacesPerLevel)
 	    {
             return Text;
 	    }

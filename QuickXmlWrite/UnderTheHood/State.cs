@@ -19,9 +19,9 @@ namespace QuickXmlWrite.UnderTheHood
             return Document.Root.AsString();
         }
 
-        public string AsHumanReadableString()
+        public string AsHumanReadableString(int numberOfSpacesPerLevel)
         {
-            return Document.Root.AsHumanReadableString(0);
+            return Document.Root.AsHumanReadableString(0, numberOfSpacesPerLevel);
         }
     }
 }
