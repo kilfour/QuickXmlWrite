@@ -11,6 +11,11 @@
             return State.AsString();
         }
 
+        public string AsHumanReadableString()
+        {
+            return State.AsHumanReadableString();
+        }
+
         public static Result<XmlWriterNode<TValue>> WriterNodeResultFromState(State state)
         {
             return new Result<XmlWriterNode<TValue>>(new XmlWriterNode<TValue>(state.Current), state);

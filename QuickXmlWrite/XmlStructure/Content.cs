@@ -7,5 +7,10 @@
 	    {
 	        return Text;
 	    }
-	}
+
+	    public override string AsHumanReadableString(int level)
+	    {
+            return Text;
+	    }
+    }
 }

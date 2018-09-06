@@ -18,5 +18,10 @@ namespace QuickXmlWrite.UnderTheHood
         {
             return Document.Root.AsString();
         }
+
+        public string AsHumanReadableString()
+        {
+            return Document.Root.AsHumanReadableString(0);
+        }
     }
 }

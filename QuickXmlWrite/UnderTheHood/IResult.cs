@@ -4,5 +4,6 @@
     {
         TValue Value { get; }
         string AsString();
+        string AsHumanReadableString();
     }
 }

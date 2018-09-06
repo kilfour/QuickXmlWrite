@@ -8,5 +8,10 @@ namespace QuickXmlWrite
         {
             return writer(new State {CurrentInput = input}).AsString();
         }
+
+        public static string WriteHumanReadable<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, TInput input)
+        {
+            return writer(new State { CurrentInput = input }).AsHumanReadableString();
+        }
     }
 }
