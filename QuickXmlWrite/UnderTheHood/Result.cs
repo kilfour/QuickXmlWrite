@@ -11,9 +11,9 @@
             return State.AsString();
         }
 
-        public string AsHumanReadableString(int numberOfSpacesPerLevel)
+        public string AsHumanReadableString(int numberOfSpacesPerLevel, bool htmlEncoded)
         {
-            return State.AsHumanReadableString(numberOfSpacesPerLevel);
+            return State.AsHumanReadableString(numberOfSpacesPerLevel, htmlEncoded);
         }
 
         public static Result<XmlWriterNode<TValue>> WriterNodeResultFromState(State state)

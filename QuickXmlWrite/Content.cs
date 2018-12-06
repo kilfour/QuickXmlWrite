@@ -9,7 +9,7 @@ namespace QuickXmlWrite
         public static XmlWriter<XmlWriterNode<TInput>> Content<TInput>(this XmlWriterNode<TInput> writerNode, string text, bool asCData = false)
         {
             return state => {
-                var content = new Content { Text = DecorateWithCDataIfRequired(text, asCData) };
+                var content = new Content { Text = text, AsCData = asCData };
                 writerNode.Node.Add(content);
                 return new Result<XmlWriterNode<TInput>>(writerNode, state); };
         }
@@ -17,7 +17,7 @@ namespace QuickXmlWrite
         public static XmlWriter<XmlWriterNode<TInput>> Content<TInput>(this XmlWriterNode<TInput> writerNode, Func<TInput, string> func, bool asCData = false)
         {
             return state => {
-                var content = new Content { Text = DecorateWithCDataIfRequired(state.GetValue(func), asCData) };
+                var content = new Content { Text = state.GetValue(func), AsCData = asCData };
                 writerNode.Node.Add(content);
                 return new Result<XmlWriterNode<TInput>>(writerNode, state); };
         }
@@ -26,7 +26,7 @@ namespace QuickXmlWrite
         {
             return state => {
                 var result = writer(state);
-                var content = new Content {Text = DecorateWithCDataIfRequired(value, asCData) };
+                var content = new Content {Text = value, AsCData = asCData };
                 result.Value.Node.Add(content);
                 return Result<TInput>.WriterNodeResultFromState(state); };
         }
@@ -35,18 +35,9 @@ namespace QuickXmlWrite
         {
             return state => {
                 var result = writer(state);
-                var content = new Content {Text = DecorateWithCDataIfRequired(state.GetValue(func), asCData) };
+                var content = new Content {Text = state.GetValue(func), AsCData = asCData };
                 result.Value.Node.Add(content);
                 return Result<TInput>.WriterNodeResultFromState(state); };
-        }
-
-        private static string DecorateWithCDataIfRequired(string text, bool asCData)
-        {
-            if (asCData)
-            {
-                return $"<![CDATA[{text}]]>";
-            }
-            return text;
         }
     }
 }

@@ -9,9 +9,9 @@ namespace QuickXmlWrite
             return writer(new State {CurrentInput = input}).AsString();
         }
 
-        public static string WriteHumanReadable<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, TInput input, int numberOfSpacesPerLevel)
+        public static string WriteHumanReadable<TInput>(this XmlWriter<XmlWriterNode<TInput>> writer, TInput input, int numberOfSpacesPerLevel, bool htmlEncoded)
         {
-            return writer(new State { CurrentInput = input }).AsHumanReadableString(numberOfSpacesPerLevel);
+            return writer(new State { CurrentInput = input }).AsHumanReadableString(numberOfSpacesPerLevel, htmlEncoded);
         }
     }
 }

@@ -4,6 +4,6 @@
     {
         TValue Value { get; }
         string AsString();
-        string AsHumanReadableString(int numberOfSpacesPerLevel);
+        string AsHumanReadableString(int numberOfSpacesPerLevel, bool htmlEncoded);
     }
 }

@@ -45,7 +45,7 @@ namespace QuickXmlWrite.XmlStructure
 	        return builder.ToString();
 	    }
 
-	    public override string AsHumanReadableString(int level, int numberOfSpacesPerLevel)
+	    public override string AsHumanReadableString(int level, int numberOfSpacesPerLevel, bool htmlEncoded)
 	    {
 	        var builder = new StringBuilder();
             builder.AppendLine();
@@ -64,7 +64,7 @@ namespace QuickXmlWrite.XmlStructure
 	        builder.Append(">");
             foreach (var child in Children)
 	        {
-	            builder.Append(child.AsHumanReadableString(level + 1, numberOfSpacesPerLevel));
+	            builder.Append(child.AsHumanReadableString(level + 1, numberOfSpacesPerLevel, htmlEncoded));
 	        }
 	        var lastChild = Children.Last();
 	        if (lastChild is Node)
